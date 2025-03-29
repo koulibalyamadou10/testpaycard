@@ -12,9 +12,10 @@ const InfiniteScroll = () => {
       if (loading) return;  // Si une requête est déjà en cours, on n'en lance pas une nouvelle
       setLoading(true);
 
-      const response = await fetch(`http://localhost:8000/api/items/?page=${page}`);
+      const response = await fetch(`https:api.kambily.com/products/viewset/?page=${page}`);
       const data = await response.json();
 
+      // @ts-ignore
       setItems((prevItems) => [...prevItems, ...data.results]); // Ajoute les nouveaux éléments à la liste
       setHasMore(data.next !== null); // Si `next` est null, on n'a plus de données à charger
       setLoading(false);
@@ -36,7 +37,7 @@ const InfiniteScroll = () => {
           style={{ height: '80vh', overflowY: 'scroll' }}
       >
         {items.map((item) => (
-            <div key={item.id} className="item">
+            <div key={item.id} style={{height:'400px', backgroundColor:'red'}} className="item">
               {/* Affiche les éléments ici */}
               {item.name}
             </div>
